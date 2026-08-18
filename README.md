@@ -8,6 +8,32 @@ Customer-facing operations and AI solutions professional building practical auto
 
 ## Selected automation projects
 
+### [Ayudame](https://github.com/elduroentodo/ayudame) — RAG agent foundation
+
+**Operational pain relieved:** Businesses often need to answer repeated questions from their own knowledge, but information is spread across documents and internal material. A generic chatbot cannot reliably ground its answers in that business context.
+
+**What it does:** A deployable foundation for simple retrieval-augmented generation (RAG) agents. It prepares knowledge for retrieval and gives each agent access to relevant context when responding.
+
+**How it works:**
+
+```text
+Business knowledge
+  → ingestion endpoint
+  → vector storage in Postgres
+  → retrieve relevant context
+  → AI agent response grounded in that context
+```
+
+**Implementation highlights:** Next.js, Vercel AI SDK, OpenAI/Anthropic model support, Neon Postgres, pgvector, and a planned path toward document ingestion, multi-tenant access, evaluation, and an embedded widget.
+
+**Skills demonstrated:** RAG architecture, vector databases, data ingestion, API design, applied AI, and product-oriented technical thinking.
+
+---
+
+### [Cloudflare Worker automation bots](https://github.com/elduroentodo/cloudflare-worker-automation-bots) — Public code showcase
+
+A sanitized, public code repository with the Worker patterns behind the two operational bots below. It includes readable source, a safe Wrangler configuration template, D1-backed state management, and explicit notes on secrets handling.
+
 ### Declara Fácil — Guided tax-document intake bot
 
 **Operational pain relieved:** Preparing an income-tax case often begins with scattered documents, uncertainty about which supports apply, incomplete submissions, and repeated manual follow-up. That creates delays for both the client and the tax-preparation team.
@@ -24,6 +50,8 @@ Client on Telegram
   → spreadsheet-based operational visibility
   → human escalation when needed
 ```
+
+**Source:** [sanitized Cloudflare Worker implementation](https://github.com/elduroentodo/cloudflare-worker-automation-bots/blob/main/src/declara-facil-worker.js)
 
 **Implementation highlights:** Cloudflare Worker webhook, Telegram Bot API, Cloudflare D1 for structured client and workflow state, conditional document checklist, duplicate-safe status updates, Google Drive/Sheets integration through OAuth, and a human-in-the-loop escalation path. The design explicitly avoids requesting passwords, verification codes, or electronic signatures through chat.
 
@@ -47,6 +75,8 @@ Client on Telegram
   → PDF generation
   → quotation delivered back in Telegram
 ```
+
+**Source:** [sanitized Cloudflare Worker implementation](https://github.com/elduroentodo/cloudflare-worker-automation-bots/blob/main/src/casanova-quotation-worker.js)
 
 **Implementation highlights:** Cloudflare Worker webhook, Telegram Bot API, Cloudflare D1 session state, input parsing for prices and quantities, interactive Telegram buttons, generated PDF output, calculation logic, and a review-and-correction step before finalization.
 
