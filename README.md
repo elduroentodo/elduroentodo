@@ -30,6 +30,30 @@ Business knowledge
 
 ---
 
+### [Order Integration Platform](https://github.com/elduroentodo/order-integration-platform) — TypeScript API and data-flow project
+
+**Operational pain relieved:** Order integrations need to cope with malformed data, ambiguous outcomes, and duplicate submissions caused by network retries. Without clear API contracts and duplicate protection, an operation can create incorrect or repeated orders.
+
+**What it does:** A TypeScript HTTP API that validates wholesale order payloads, accepts new orders, retrieves stored records, rejects duplicates, and exposes a health endpoint for operational checks.
+
+**How it works:**
+
+```text
+Retailer/API client
+  → POST /orders with JSON
+  → runtime validation
+  → duplicate-ID protection
+  → order storage and explicit HTTP response
+```
+
+**Current implementation:** Native Node.js HTTP server, strict TypeScript, JSON validation, in-memory order store, `201 Created`/`400 Bad Request`/`404 Not Found`/`409 Conflict` response handling, and a runnable learning guide.
+
+**Next milestone:** Replace the temporary in-memory store with PostgreSQL and add durable processing status, retries, and warehouse delivery.
+
+**Skills demonstrated:** TypeScript, Node.js APIs, JSON payload validation, idempotency, HTTP semantics, data modeling, and integration architecture.
+
+---
+
 ### [Cloudflare Worker automation bots](https://github.com/elduroentodo/cloudflare-worker-automation-bots) — Public code showcase
 
 A sanitized, public code repository with the Worker patterns behind the two operational bots below. It includes readable source, a safe Wrangler configuration template, D1-backed state management, and explicit notes on secrets handling.
