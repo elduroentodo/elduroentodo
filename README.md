@@ -2,7 +2,7 @@
 
 Customer-facing operations and AI solutions professional building practical automation systems. I translate messy operational workflows into guided, reliable experiences for customers and internal teams.
 
-- 🌎 Based in Colombia · fluent English (C2)
+- 🌎 Based in Mexico · fluent English (C2)
 - 🎯 Focus: API integrations, workflow automation, data management, and customer-facing technical solutions
 - 📫 Reach me at [sebastian.espindola.h@gmail.com](mailto:sebastian.espindola.h@gmail.com)
 
