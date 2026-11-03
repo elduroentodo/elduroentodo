@@ -12,7 +12,7 @@ The automation aims to answer routine questions quickly, collect enough informat
 
 ## My role and solution
 
-I owned the automation from initial design through implementation. The customer-facing flow combines free-text questions, guided choices, reservation verification, booking-data retrieval, and action-specific paths such as confirmation-email resend. The screenshots establish the behavior visible to a customer; they do not expose the private systems or code behind it.
+I owned the automation from initial design through implementation. The customer-facing flow combines free-text questions, guided choices, an API-backed reservation-verification gate, booking-data retrieval, and action-specific paths such as confirmation-email resend. The screenshots establish the behavior visible to a customer; they do not expose the private systems or code behind it.
 
 The technologies I used were:
 
@@ -32,11 +32,17 @@ Customer question through WhatsApp Business API
         ↓
 Automation logic: recognize the task or ask a clarifying question
         ↓
-For booking-specific requests: collect the order reference and verify the booking email
+For booking-specific requests: collect the order number and booking email
         ↓
-Retrieve booking/order information from Shopify-linked MySQL data
+Repeat both values for customer confirmation, then call a verification API
         ↓
-Present a focused answer or action choice; connect to Zendesk support workflow as needed
+Do order number and email match the same booking?
+        ├─ No → do not reveal booking details; ask the customer to retry
+        └─ Yes → retrieve booking/order information from Shopify-linked MySQL data
+                    ↓
+                 present a focused answer or action choice
+                    ↓
+                 connect to Zendesk support workflow as needed
 ```
 
 The diagram describes the project at a logical level. It is **not a claim that a Zendesk handoff was verified in this walkthrough**. Internal endpoint details, credentials, prompts, and operational metrics are intentionally omitted.
@@ -45,7 +51,9 @@ The diagram describes the project at a logical level. It is **not a claim that a
 
 ### 1. Identifying a reservation
 
-The bot asked for an order reference and then the email used for the booking. A guided yes/no confirmation completed the email step. It returned an “active and confirmed” status plus the rental supplier. This proves a customer-side lookup path exists. It does **not** prove the status label correctly reflects a completed rental: my trip was earlier in 2026, so the semantics of “active” deserve a separate data-quality check. The response also omitted the dates and vehicle I had asked for in the broader question.
+The bot asked for an order number and then the email used for the booking. It repeated the submitted values for confirmation; I selected the guided yes/no confirmation for the email. In my implementation, a verification API checks that **the order number and email belong to the same reservation** before the bot is allowed to return booking-specific information. A non-matching pair is designed to stop the lookup rather than disclose another customer's details. This is a knowledge-based reservation check, not a claim of stronger account authentication such as a password or one-time code.
+
+In the successful customer-side test, the bot returned an “active and confirmed” status plus the rental supplier after the confirmation steps. That demonstrates the successful lookup path. The API match logic and rejection of an incorrect pair are described from my implementation knowledge; **a wrong-data test was not completed in this walkthrough**, so I do not present it as independently observed evidence. The status label also deserves a data-quality check: my trip was earlier in 2026. The response omitted the dates and vehicle I had asked for in the broader question.
 
 The screenshot below stops before I entered the email address; the raw capture containing identifiers stays private.
 
@@ -99,6 +107,7 @@ I did not change the email address on the reservation. That is a record-modifyin
 3. **Return booking-specific coverage carefully:** cite the actual reservation terms, distinguish included coverage from optional products, and avoid generic insurance claims.
 4. **Clarify status semantics:** distinguish booking confirmation, rental start, completion, and cancellation rather than showing an old booking as simply “active.”
 5. **Measure completion honestly:** track whether a customer received the requested answer or email, not merely whether the bot produced a reply.
+6. **Exercise the verification gate:** test mismatched order/email pairs, retry limits, and masking of repeated identifiers without using another customer's data.
 
 ## Evidence and privacy
 
