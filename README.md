@@ -30,6 +30,18 @@ Business knowledge
 
 ---
 
+### [Hola Car Rentals WhatsApp automation](https://github.com/elduroentodo/elduroentodo/blob/main/projects/hola-car-rentals-whatsapp-automation/README.md) — customer-service workflow case study
+
+**Operational pain relieved:** Repetitive booking-status, pickup, insurance, confirmation-email, and pre-booking questions consume agent time and can produce inconsistent answers.
+
+**What I built:** I designed and implemented the end-to-end WhatsApp automation using the WhatsApp Business API, a Zendesk REST integration, and Shopify-linked MySQL booking data. Postman supported API testing; it was not part of the production runtime.
+
+**Customer-side evidence:** A walkthrough using my own reservation shows verification and pickup-location retrieval, along with honest notes on compound-question, insurance-answer, and language-switch limitations. The [case study](https://github.com/elduroentodo/elduroentodo/blob/main/projects/hola-car-rentals-whatsapp-automation/README.md) pairs original Spanish screenshots with English translation boxes; identifiers are redacted.
+
+**Skills demonstrated:** conversational workflow design, REST API integration, booking-data retrieval, support-system integration, privacy-aware documentation, and practical QA.
+
+---
+
 ### [Order Integration Platform](https://github.com/elduroentodo/order-integration-platform) — TypeScript API and data-flow project
 
 **Operational pain relieved:** Order integrations need to cope with malformed data, ambiguous outcomes, and duplicate submissions caused by network retries. Without clear API contracts and duplicate protection, an operation can create incorrect or repeated orders.
