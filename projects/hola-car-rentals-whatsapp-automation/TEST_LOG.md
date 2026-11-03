@@ -4,7 +4,8 @@ Test date: 2 November 2026. Channel: verified Hola Car Rentals WhatsApp account.
 
 | Scenario | Customer action | Observed response | Verification status |
 | --- | --- | --- | --- |
-| Reservation lookup | Supplied own order reference, booking email, and guided confirmation | Bot returned a confirmed status and rental supplier | Response observed; underlying status semantics not independently verified |
+| Reservation lookup | Supplied own order number, booking email, and guided confirmation | Bot returned a confirmed status and rental supplier | Successful customer-side path observed; underlying status semantics not independently verified |
+| Incorrect order/email pairing | Not attempted; builder reports that the verification API rejects non-matching pairs | No live rejection response captured | Implementation behavior reported by builder, not independently verified in this walkthrough |
 | Broad pickup question | Asked for place, address, and time together | Bot said it did not fully understand and requested a more specific question | Fallback observed; requested details not delivered |
 | Focused pickup question | Asked where to collect the car | Bot returned supplier, pickup address, and airport guidance | Pickup-location answer observed; pickup time not delivered |
 | Insurance clarification | Asked what coverage the booking included | Bot asked for destination country and confirmation | Clarification observed; no coverage answer verified |
