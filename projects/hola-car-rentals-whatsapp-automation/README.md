@@ -49,11 +49,13 @@ The diagram describes the project at a logical level. It is **not a claim that a
 
 ## Customer walkthrough and evidence
 
-### 1. Identifying a reservation
+### 1. API-backed reservation verification (authentication step)
 
 The bot asked for an order number and then the email used for the booking. It repeated the submitted values for confirmation; I selected the guided yes/no confirmation for the email. In my implementation, a verification API checks that **the order number and email belong to the same reservation** before the bot is allowed to return booking-specific information. A non-matching pair is designed to stop the lookup rather than disclose another customer's details. This is a knowledge-based reservation check, not a claim of stronger account authentication such as a password or one-time code.
 
 In the successful customer-side test, the bot returned an “active and confirmed” status plus the rental supplier after the confirmation steps. That demonstrates the successful lookup path. The API match logic and rejection of an incorrect pair are described from my implementation knowledge; **a wrong-data test was not completed in this walkthrough**, so I do not present it as independently observed evidence. The status label also deserves a data-quality check: my trip was earlier in 2026. The response omitted the dates and vehicle I had asked for in the broader question.
+
+Operationally, this gate matters because knowing only an order number should not be enough to obtain that reservation's details through the bot. The match/no-match decision separates data access from ordinary conversational replies.
 
 The screenshot below stops before I entered the email address; the raw capture containing identifiers stays private.
 
